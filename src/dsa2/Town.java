@@ -24,4 +24,5 @@ public class Town {
 	{
 		this.wasChecked = b;
 	}
+
 }
