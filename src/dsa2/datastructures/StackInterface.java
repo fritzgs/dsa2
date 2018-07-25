@@ -2,7 +2,7 @@
  * @author fritzgeraldsantos
  */
 
-package dsa2.stack;
+package dsa2.datastructures;
 
 public interface StackInterface<T>
 {

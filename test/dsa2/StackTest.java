@@ -1,10 +1,11 @@
 package dsa2;
 
-import dsa2.stack.Stack;
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.Before;
 import org.junit.jupiter.api.Test;
+
+import dsa2.datastructures.Stack;
 
 class StackTest {
 	

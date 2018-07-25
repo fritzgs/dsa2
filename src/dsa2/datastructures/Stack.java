@@ -1,7 +1,7 @@
 /**
  * @author fritzgeraldsantos
  */
-package dsa2.stack;
+package dsa2.datastructures;
 
 
 import java.util.Arrays;

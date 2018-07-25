@@ -26,9 +26,9 @@ class GraphTest {
 //				System.out.println(g.getlist()[i].getName());
 //		}
 		
-		g.addRoad("Waterford", "Dungarvan");
-		g.addRoad("Dungarvan", "Middleton");
-		g.addRoad("Middleton", "Cork");
+		g.addRoad("Waterford", "Dungarvan", 60);
+		g.addRoad("Dungarvan", "Middleton", 60);
+		g.addRoad("Middleton", "Cork", 60);
 		
 		
 		g.dfsearch();
