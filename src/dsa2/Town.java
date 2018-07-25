@@ -10,4 +10,18 @@ public class Town {
 		this.wasChecked = false;
 	}
 
+	public String getName()
+	{
+		return this.name;
+	}
+	
+	public boolean getWasChecked()
+	{
+		return this.wasChecked;
+	}
+	
+	public void setCheck(boolean b)
+	{
+		this.wasChecked = b;
+	}
 }
