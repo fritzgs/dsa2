@@ -34,7 +34,7 @@ public class Graph {
 		
 	}
 	
-	public void addRoad(String town1, String town2, int distance)
+	public void addRoad(Town town1, Town town2, int distance)
 	{
 		
 		int index1 = 0;
@@ -44,12 +44,12 @@ public class Graph {
 		{
 			if(townList[i] != null)
 			{
-				if (townList[i].getName().equals(town1))
+				if (townList[i].getName().equals(town1.getName()))
 				{
 					index1 = i;
 				}
 				
-				if (townList[i].getName().equals(town2))
+				if (townList[i].getName().equals(town2.getName()))
 				{
 					index2 = i;
 				}
@@ -61,9 +61,9 @@ public class Graph {
 		adjacentMtx[index2][index1] = distance;
 	}
 	
-	public void addTown(String name)
+	public void addTown(Town t)
 	{
-		townList[currentNum++] = new Town(name);
+		townList[currentNum++] = t;
 	}
 	
 	public void displayTown(int index)
@@ -341,6 +341,11 @@ public class Graph {
 	public Town[] getlist()
 	{
 		return townList;
+	}
+	
+	public int[][] getMatrix()
+	{
+		return adjacentMtx;
 	}
 	
 	
