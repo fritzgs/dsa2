@@ -9,11 +9,15 @@ import org.junit.jupiter.api.Test;
 
 class GraphTest {
 
-	Graph g;
-	Town wat;
-	Town dun;
-	Town mid;
-	Town cor;
+	private Graph g;
+	private Town wat;
+	private Town dun;
+	private Town mid;
+	private Town cork;
+	private Town cobh;
+	private Town clon;
+	private Town caros;
+	
 	
 	@Before
 	public void setUp() 
@@ -22,16 +26,26 @@ class GraphTest {
 		wat = new Town("Waterford");
 		dun = new Town("Dungarvan");
 		mid = new Town("Middleton");
-		cor = new Town("Cork");
+		cork = new Town("Cork");
+		cobh = new Town("Cobh");
+		clon = new Town("Clonmel");
+		caros = new Town("Carrick-on-Suir");
 	
-		g.addTown(wat);
-		g.addTown(dun);
-		g.addTown(cor);
-		g.addTown(mid);
+		g.addTown(wat); //0
+		g.addTown(dun); //1
+		g.addTown(cork); //2
+		g.addTown(mid); //3
+		g.addTown(cobh); //4
+		g.addTown(caros); //5
 		
 		g.addRoad(wat, dun, 60);
-		g.addRoad(dun, mid, 60);
-		g.addRoad(mid, cor, 20);
+		g.addRoad(mid, dun, 50);
+		g.addRoad(mid, cork, 20);
+		g.addRoad(mid, cobh, 20);
+		g.addRoad(wat, caros, 30);
+		g.addRoad(dun, caros, 25);
+		
+		g.dfsearch();
 		
 	}
 	
@@ -57,14 +71,6 @@ class GraphTest {
 		assertEquals(20, g.getMatrix()[2][3]);
 		assertEquals(1000000, g.getMatrix()[2][1]); //direct road from Dungarvan to Cork does not exist.
 		
-		
-	}
-	
-	@Test
-	public void getMinTest()
-	{
-		setUp();
-//		g.path();
 		
 	}
 	

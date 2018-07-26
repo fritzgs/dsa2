@@ -24,6 +24,8 @@ public class Graph {
 		townList = new Town[100];
 		adjacentMtx = new int[MAX_TOWNS][MAX_TOWNS];
 		currentNum = 0;
+		nTree = 0;
+		
 		for(int i = 0; i < MAX_TOWNS; i++)
 			for(int j =0; j < MAX_TOWNS; j++)
 				adjacentMtx[i][j] = INFINITY;
@@ -31,6 +33,8 @@ public class Graph {
 		stack = new Stack<>();
 		
 		priorityQueue = new PriorityQueue();
+		
+		sPath = new DistanceParent[MAX_TOWNS];
 		
 	}
 	
@@ -44,19 +48,23 @@ public class Graph {
 		{
 			if(townList[i] != null)
 			{
-				if (townList[i].getName().equals(town1.getName()))
+				if (townList[i].equals(town1))
 				{
+					System.out.println(i);
 					index1 = i;
 				}
 				
-				if (townList[i].getName().equals(town2.getName()))
+				if (townList[i].equals(town2))
 				{
+					System.out.println(i);
+
 					index2 = i;
 				}
 			}
 			
 		}
 		
+		System.out.println("----");
 		adjacentMtx[index1][index2] = distance;
 		adjacentMtx[index2][index1] = distance;
 	}
@@ -123,7 +131,7 @@ public class Graph {
 		
 		while(!stack.isEmpty()) //loop while stack is isn't empty
 		{
-			int currentTown = stack.peek();
+//			int currentTown = stack.peek();
 			//get an unvisited town adjacent to stack top.
 			int v = getAdjacentUnvisitedTown(currentTown);
 			if(v==-1)
@@ -186,6 +194,8 @@ public class Graph {
 			//display road from source to dest.
 			System.out.println(townList[sourceTown].getName());
 			System.out.println(townList[currentTown].getName());
+			
+			System.out.println("");
 
 		}
 		
@@ -240,7 +250,7 @@ public class Graph {
 			int indexMin = getMin();
 			int minDist = sPath[indexMin].getDistance();
 			
-			if(minDist == INFINITY)
+			if(minDist == INFINITY) //if all infinite or in tree
 			{
 				System.out.println("Unreachable town");
 				break;
@@ -251,6 +261,7 @@ public class Graph {
 				startToCurrent = sPath[indexMin].getDistance();
 			}
 			
+			//put current town in tree
 			townList[currentTown].setIsInTree(true);
 			nTree++;
 			adjustSPath();
@@ -323,7 +334,7 @@ public class Graph {
 	{
 		for (int i=0; i < currentNum; i++)
 		{
-			System.out.println(townList[i].getName() + "=");
+			System.out.println(townList[i].getName() + "= ");
 			if (sPath[i].getDistance() == INFINITY)
 			{
 				System.out.println("infinite");
