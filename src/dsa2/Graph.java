@@ -50,13 +50,13 @@ public class Graph {
 			{
 				if (townList[i].equals(town1))
 				{
-					System.out.println(i);
+//					System.out.println(i);
 					index1 = i;
 				}
 				
 				if (townList[i].equals(town2))
 				{
-					System.out.println(i);
+//					System.out.println(i);
 
 					index2 = i;
 				}
@@ -64,14 +64,15 @@ public class Graph {
 			
 		}
 		
-		System.out.println("----");
-		adjacentMtx[index1][index2] = distance;
-		adjacentMtx[index2][index1] = distance;
+//		System.out.println("----");
+		adjacentMtx[index1][index2] = 1;
+		adjacentMtx[index2][index1] = 1;
 	}
 	
 	public void addTown(Town t)
 	{
 		townList[currentNum++] = t;
+		addRoad(t, t, 0);
 	}
 	
 	public void displayTown(int index)
@@ -81,6 +82,8 @@ public class Graph {
 	
 	public int getAdjacentUnvisitedTown(int t)
 	{
+//		System.out.println(t);
+//		System.out.println(adjacentMtx[0][0]);
 		for(int i=0; i < currentNum; i++)
 		{
 			if(adjacentMtx[t][i] == 1 && townList[i].getWasChecked()==false)
@@ -92,7 +95,10 @@ public class Graph {
 		return -1;
 	}
 	
-	
+
+/*
+ * Method of traversing the graph: Depth first search - going through tree data structure by accessing the root node first.
+ */
 	public void dfsearch()
 	{
 		townList[0].setCheck(true);
@@ -103,6 +109,7 @@ public class Graph {
 		{
 			//get an unvisited town adjacent to stack top.
 			int v = getAdjacentUnvisitedTown(stack.peek());
+//			System.out.println(v);
 			if(v==-1)
 			{
 				stack.pop();
@@ -112,10 +119,10 @@ public class Graph {
 				townList[v].setCheck(true);
 				stack.push(v);
 				displayTown(v);
-//				System.out.println(" ");
 			}
 		}
 		
+		//reset the flag to false.
 		for(int i = 0; i < currentNum; i++)
 		{
 			townList[i].setCheck(false);
@@ -131,9 +138,9 @@ public class Graph {
 		
 		while(!stack.isEmpty()) //loop while stack is isn't empty
 		{
-//			int currentTown = stack.peek();
+			int currentTown = stack.peek();
 			//get an unvisited town adjacent to stack top.
-			int v = getAdjacentUnvisitedTown(currentTown);
+			int v = getAdjacentUnvisitedTown(stack.peek());
 			if(v==-1)
 			{
 				stack.pop();
@@ -155,77 +162,9 @@ public class Graph {
 		
 	}
 	
-	
-	public void mstreeWeighted()
+	public void getDistance(Town town1, Town town2)
 	{
-		int currentTown = 0;
-		while(nTree < currentNum-1) //while not all towns in tree, put currentTown in tree.
-		{		
-			townList[currentTown].setIsInTree(true);
-			nTree++;
-			
-			//insert road adjacent to currentTown into PriorityQueue.
-			for(int i = 0; i < currentNum; i++)
-			{
-				if(i == currentTown) //skip
-					continue;
-				if(townList[i].getIsInTree()) //skip if in tree already
-					continue;
-				
-				int distance = adjacentMtx[currentTown][i];
-				
-				if(distance == INFINITY) //skip if no edge
-					continue;
-				
-				putInPQ(i, distance); 
-			}
-			
-			if(priorityQueue.size()==0) //no towns in pq.
-			{
-				System.out.println("Not connected");
-				return;
-			}
-			
-			//remove road with minimum distance from PQ.
-			Road road = priorityQueue.removeMin();
-			int sourceTown = road.getSrcTown();
-			currentTown = road.getDestTown();
-			
-			//display road from source to dest.
-			System.out.println(townList[sourceTown].getName());
-			System.out.println(townList[currentTown].getName());
-			
-			System.out.println("");
-
-		}
 		
-		for (int j=0; j < currentNum; j++)
-		{
-			townList[j].setIsInTree(false);
-		}
-			
-	}
-	
-	public void putInPQ(int newTown, int newDistance)
-	{
-		//is  there another edge with the same destination town?
-		int queueIndex = priorityQueue.find(newTown);
-		if(queueIndex != -1)
-		{
-			Road temp = priorityQueue.peek(queueIndex);
-			int oldDistance = temp.getDistance();
-			if(oldDistance > newDistance)
-			{
-				priorityQueue.remove(queueIndex);
-				Road road = new Road(currentTown, newTown, newDistance);
-				priorityQueue.insert(road);
-			}
-		}
-		else
-		{
-			Road road = new Road(currentTown, newTown, newDistance);
-			priorityQueue.insert(road);
-		}
 	}
 	
 	

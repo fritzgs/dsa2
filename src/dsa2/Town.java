@@ -10,6 +10,7 @@ public class Town {
 		this.name = name;
 		this.wasChecked = false;
 		this.isInTree = false;
+		
 	}
 
 	public boolean getIsInTree()
