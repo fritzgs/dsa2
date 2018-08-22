@@ -65,8 +65,8 @@ public class Graph {
 		}
 		
 //		System.out.println("----");
-		adjacentMtx[index1][index2] = 1;
-		adjacentMtx[index2][index1] = 1;
+		adjacentMtx[index1][index2] = distance;
+		adjacentMtx[index2][index1] = distance;
 	}
 	
 	public void addTown(Town t)
@@ -86,7 +86,7 @@ public class Graph {
 //		System.out.println(adjacentMtx[0][0]);
 		for(int i=0; i < currentNum; i++)
 		{
-			if(adjacentMtx[t][i] == 1 && townList[i].getWasChecked()==false)
+			if(adjacentMtx[t][i] != INFINITY && townList[i].getWasChecked()==false)
 			{
 				return i;
 			}
@@ -162,9 +162,24 @@ public class Graph {
 		
 	}
 	
-	public void getDistance(Town town1, Town town2)
+	public int getDistance(String town1, String town2)
 	{
+		int row = 0;
+		int col = 0;
+		for(int i = 0; i < currentNum; i++)
+		{
+			if(townList[i].getName().toLowerCase().equals(town1.toLowerCase()))
+			{
+				row = i;
+			}
+			else if (townList[i].getName().toLowerCase().equals(town2.toLowerCase()))
+			{
+
+				col = i;
+			}
+		}
 		
+		return adjacentMtx[row][col];
 	}
 	
 	
