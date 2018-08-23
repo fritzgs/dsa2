@@ -5,6 +5,7 @@ import dsa2.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import org.junit.Before;
 import org.junit.jupiter.api.Test;
@@ -40,17 +41,22 @@ class GraphTest {
 		g.addTown(cobh); //4
 		g.addTown(caros); //5
 		
-		g.addRoad(wat, dun, 30);
+		g.addRoad(wat, dun, 40);
 		g.addRoad(mid, dun, 50);
 		g.addRoad(mid, cork, 20);
 		g.addRoad(mid, cobh, 30);
 		g.addRoad(wat, caros, 50);
 		g.addRoad(dun, caros, 25);
 		
+		
 //		g.dfsearch();
 //		g.mstree();
-		g.getShortestRoute("Waterford", "Cork");
-
+//		System.out.println(Arrays.toString(g.getShortestRoute("Waterford", "Cork")));
+		int[] path = g.getShortestRoute("Waterford", "Cork");
+		for(int i : path)
+		{
+			System.out.println(g.getlist()[i]);
+		}
 	}
 	
 	

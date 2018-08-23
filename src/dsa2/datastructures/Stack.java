@@ -17,7 +17,7 @@ public class Stack<T> implements StackInterface<T>{
 	public Stack()
 	{
 		top=-1;
-		size=10;
+		size= 0;
 		stack = (T[]) new Object[size];
 	}
 	
@@ -93,8 +93,12 @@ public class Stack<T> implements StackInterface<T>{
 	
 	public void addSize()
 	{
-		size += 10;
+		size ++;
 		stack = Arrays.copyOf(stack, size);
 	}
  
+	public void setSize(int size)
+	{
+		this.size = size;
+	}
 }

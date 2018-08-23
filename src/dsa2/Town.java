@@ -49,5 +49,11 @@ public class Town {
 	{
 		this.value = v;
 	}
+	
+	@Override
+	public String toString()
+	{
+		return this.name;
+	}
 
 }

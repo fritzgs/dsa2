@@ -189,7 +189,7 @@ public class Graph {
 	}
 	
 	
-	public void getShortestRoute(String start, String dest)
+	public int[] getShortestRoute(String start, String dest)
 	{
 		//Put all unvisited towns into a set
 		//set start town to have value = 0
@@ -203,10 +203,11 @@ public class Graph {
 		ArrayList<Integer> unvisited = new ArrayList<>();
 		int startIndex = 0;
 		int endIndex = 0;
-
+		int prev[] = new int[currentNum];
 		for(int i=0; i < currentNum; i++)
 		{
 			unvisited.add(i);
+			prev[i] = -1;
 			if(townList[i].getName().toLowerCase().equals(start.toLowerCase()))
 				startIndex = i;
 			else if(townList[i].getName().toLowerCase().equals(dest.toLowerCase()))
@@ -226,6 +227,7 @@ public class Graph {
 				if(townList[town].getValue() > townList[currentTown].getValue() + adjacentMtx[currentTown][town])
 				{
 					townList[town].setValue(townList[currentTown].getValue() + adjacentMtx[currentTown][town]);
+					prev[town] = currentTown;
 				}
 			}
 			
@@ -234,8 +236,29 @@ public class Graph {
 		
 		}
 		
-		System.out.println(townList[endIndex].getValue());
 		
+		
+
+		while(prev[endIndex] != -1)
+		{
+			stack.addSize();
+			stack.push(endIndex);
+			endIndex = prev[endIndex];
+		}
+
+		stack.push(startIndex);
+
+		
+		int[] path = new int[stack.size()];
+		for(int j =0; j < stack.size(); j++)
+		{
+			path[j] = stack.pop();
+			
+		}
+		
+//		System.out.println(x);
+
+		return path;
 	}
 	
 	public int getMin(ArrayList<Integer> arr)
