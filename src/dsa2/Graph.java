@@ -1,5 +1,11 @@
 package dsa2;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
+
 import dsa2.datastructures.*;
 
 
@@ -183,104 +189,93 @@ public class Graph {
 	}
 	
 	
-	public void path()
+	public void getShortestRoute(String start, String dest)
 	{
-		int startTree = 0;
+		//Put all unvisited towns into a set
+		//set start town to have value = 0
+		//use getMin() to find the lowest value that's unvisited
+		//use return of getMin() as the currentTown
+		//find adjacent of currentTown and give new values
+		//Remove currentTown from unvisited 
+		//Repeat 3,4,5,6
 		
-		townList[startTree].setIsInTree(true);
 		
-		nTree = 1;
-		
-		//transfer row of distances from adjacentMtx to sPath
-		for(int i=0; i<currentNum; i++)
-		{
-			int tempDist = adjacentMtx[startTree][i];
-			sPath[i] = new DistanceParent(startTree, tempDist);
-		}
-		
-		//until all towns are in the tree.
-		while(nTree < currentNum)
-		{
-			int indexMin = getMin();
-			int minDist = sPath[indexMin].getDistance();
-			
-			if(minDist == INFINITY) //if all infinite or in tree
-			{
-				System.out.println("Unreachable town");
-				break;
-			}
-			else
-			{
-				currentTown = indexMin;
-				startToCurrent = sPath[indexMin].getDistance();
-			}
-			
-			//put current town in tree
-			townList[currentTown].setIsInTree(true);
-			nTree++;
-			adjustSPath();
-		}
-		
-		displayPaths();
-		
-		nTree = 0;
-		
+		ArrayList<Integer> unvisited = new ArrayList<>();
+		int startIndex = 0;
+		int endIndex = 0;
+
 		for(int i=0; i < currentNum; i++)
 		{
-			townList[i].setIsInTree(false);
+			unvisited.add(i);
+			if(townList[i].getName().toLowerCase().equals(start.toLowerCase()))
+				startIndex = i;
+			else if(townList[i].getName().toLowerCase().equals(dest.toLowerCase()))
+				endIndex = i;
 		}
+		
+		
+		townList[startIndex].setValue(0);
+		
+		
+		while(townList[endIndex].getWasChecked() == false)
+		{
+			currentTown = getMin(unvisited);
+			ArrayList<Integer> adj = getAdjacent(currentTown);
+			for (int town : adj)
+			{
+				if(townList[town].getValue() > townList[currentTown].getValue() + adjacentMtx[currentTown][town])
+				{
+					townList[town].setValue(townList[currentTown].getValue() + adjacentMtx[currentTown][town]);
+				}
+			}
+			
+			townList[currentTown].setCheck(true);
+			unvisited.remove(unvisited.indexOf(currentTown));
+		
+		}
+		
+		System.out.println(townList[endIndex].getValue());
 		
 	}
 	
-	public int getMin()
+	public int getMin(ArrayList<Integer> arr)
 	{
-		int minDist = INFINITY;
-		
-		int indexMin = 0;
-		
-		for(int i = 1; i < currentNum; i++)
+		int min = 0;
+		ArrayList<Integer> values = new ArrayList<>();
+		for (int i : arr)
 		{
-			if(!townList[i].getIsInTree() && sPath[i].getDistance() < minDist)
+			values.add(townList[i].getValue());
+			
+		}
+		
+		Collections.sort(values);
+		
+		for (int j : arr)
+		{
+			if(values.get(0) == townList[j].getValue())
 			{
-				minDist = sPath[i].getDistance();
-				indexMin = i;
+				min = j;
 			}
 		}
 		
-		return indexMin;
+		return min;
+		
 	}
 	
-	public void adjustSPath()
+	
+	public ArrayList<Integer> getAdjacent(int t)
 	{
-		int column = 1;
-		while(column < currentNum)
+		ArrayList<Integer> adj = new ArrayList<>();
+		for(int i = 0; i < currentNum;i++)
 		{
-			//if this column's town is already in the tree, skip it
-			if(townList[column].getIsInTree())
+
+			if(adjacentMtx[t][i] != INFINITY)
 			{
-				column++;
-				continue;
+				adj.add(i);
 			}
-			
-			//cqlculate distance for one sPath entry
-			//get road from currentTown to column.
-			int currentToFringe = adjacentMtx[currentTown][column];
-			
-			//add distance from start
-			int startToFringe = startToCurrent + currentToFringe;
-			
-			//get distance of current sPath entry.
-			int sPathDist = sPath[column].getDistance();
-			
-			//compare distance from start with sPath entry
-			if(startToFringe < sPathDist)
-			{
-				sPath[column].setParentTown(currentTown);
-				sPath[column].setDistance(startToFringe);	
-			}
-			
-			column++;
 		}
+		
+		return adj;
 	}
 	
 	
