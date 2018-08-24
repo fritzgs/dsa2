@@ -191,6 +191,7 @@ public class Graph {
 	
 	public int[] getShortestRoute(String start, String dest)
 	{
+		//Dijstra's Algorithm
 		//Put all unvisited towns into a set
 		//set start town to have value = 0
 		//use getMin() to find the lowest value that's unvisited
@@ -260,6 +261,97 @@ public class Graph {
 
 		return path;
 	}
+	
+	public int[] getShortestRouteAvoid(String start, String dest, String[] avoid)
+	{
+		//Dijstra's Algorithm
+		//Put all unvisited towns into a set
+		//set start town to have value = 0
+		//use getMin() to find the lowest value that's unvisited
+		//use return of getMin() as the currentTown
+		//find adjacent of currentTown and give new values
+		//Remove currentTown from unvisited 
+		//Repeat 3,4,5,6
+		
+		
+		ArrayList<Integer> unvisited = new ArrayList<>();
+		int startIndex = 0;
+		int endIndex = 0;
+		int prev[] = new int[currentNum];
+		for(int i=0; i < currentNum; i++)
+		{
+			unvisited.add(i);
+			prev[i] = -1;
+			if(townList[i].getName().toLowerCase().equals(start.toLowerCase()))
+				startIndex = i;
+			else if(townList[i].getName().toLowerCase().equals(dest.toLowerCase()))
+				endIndex = i;
+		}
+		
+		
+		
+		
+		townList[startIndex].setValue(0);
+		
+		while(townList[endIndex].getWasChecked() == false)
+		{
+			currentTown = getMin(unvisited);
+			ArrayList<Integer> adj = getAdjacent(currentTown);
+			System.out.println(currentTown);
+			System.out.println("");
+			for (int town : adj)
+			{
+
+				for(String av : avoid)
+				{
+					if(!townList[town].getName().toLowerCase().equals(av.toLowerCase()))
+					{
+						if(townList[town].getValue() > townList[currentTown].getValue() + adjacentMtx[currentTown][town])
+						{
+//							System.out.println(town);
+//							System.out.println("");
+							townList[town].setValue(townList[currentTown].getValue() + adjacentMtx[currentTown][town]);
+							prev[town] = currentTown;
+						}
+					}
+					else
+					{
+						townList[town].setValue(INFINITY);
+					}
+				}
+			}
+			
+			townList[currentTown].setCheck(true);
+			unvisited.remove(unvisited.indexOf(currentTown));
+		
+		}
+		
+		
+		
+
+		while(prev[endIndex] != -1)
+		{
+			stack.addSize();
+			stack.push(endIndex);
+			endIndex = prev[endIndex];
+		}
+
+		stack.push(startIndex);
+
+		
+		int[] path = new int[stack.size()];
+		for(int j =0; j < stack.size(); j++)
+		{
+			path[j] = stack.pop();
+			
+		}
+		
+//		System.out.println(x);
+
+		return path;
+	}
+	
+	
 	
 	public int getMin(ArrayList<Integer> arr)
 	{
