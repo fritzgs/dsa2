@@ -287,10 +287,7 @@ public class Graph {
 			else if(townList[i].getName().toLowerCase().equals(dest.toLowerCase()))
 				endIndex = i;
 		}
-		
-		
-		
-		
+
 		townList[startIndex].setValue(0);
 		
 		while(townList[endIndex].getWasChecked() == false)
@@ -323,9 +320,6 @@ public class Graph {
 			unvisited.remove(unvisited.indexOf(currentTown));
 		
 		}
-		
-		
-		
 
 		while(prev[endIndex] != -1)
 		{
@@ -336,7 +330,6 @@ public class Graph {
 
 		stack.push(startIndex);
 
-		
 		int[] path = new int[stack.size()];
 		for(int j =0; j < stack.size(); j++)
 		{
@@ -345,18 +338,20 @@ public class Graph {
 		}
 		
 		System.out.println(townList[path[0]].getName() + " to " + townList[path[path.length-1]].getName());
-
-		System.out.println("\nvia the following towns: \n");
+		
+		if(path.length > 2)
+			System.out.println("\nvia the following towns: \n");
 		
 		for (int t: path)
 		{
 			if(t != path[0] && t != path[path.length-1])
 				System.out.println(townList[t].getName());
+//			if(if path[path.length-1] )
 		}
 		
+		System.out.println("\nTotal Distance = "+ townList[path[path.length-1]].getValue() + " kilometers");
+		
 	}
-	
-	
 	
 	public int getMin(ArrayList<Integer> arr)
 	{

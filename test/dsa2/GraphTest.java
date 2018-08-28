@@ -49,7 +49,7 @@ class GraphTest {
 		g.addRoad(caros, cork, 20);
 		
 		
-		g.dfsearch();
+//		g.dfsearch();
 //		g.mstree();
 //		System.out.println(Arrays.toString(g.getShortestRoute("Waterford", "Cork")));
 		String[] avoid = {"carrick-on-suir"};
