@@ -262,7 +262,7 @@ public class Graph {
 		return path;
 	}
 	
-	public int[] getShortestRouteAvoid(String start, String dest, String[] avoid)
+	public void getShortestRouteAvoid(String start, String dest, String[] avoid)
 	{
 		//Dijstra's Algorithm
 		//Put all unvisited towns into a set
@@ -297,8 +297,6 @@ public class Graph {
 		{
 			currentTown = getMin(unvisited);
 			ArrayList<Integer> adj = getAdjacent(currentTown);
-			System.out.println(currentTown);
-			System.out.println("");
 			for (int town : adj)
 			{
 
@@ -346,9 +344,16 @@ public class Graph {
 			
 		}
 		
-//		System.out.println(x);
+		System.out.println(townList[path[0]].getName() + " to " + townList[path[path.length-1]].getName());
 
-		return path;
+		System.out.println("\nvia the following towns: \n");
+		
+		for (int t: path)
+		{
+			if(t != path[0] && t != path[path.length-1])
+				System.out.println(townList[t].getName());
+		}
+		
 	}
 	
 	

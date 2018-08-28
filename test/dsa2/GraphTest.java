@@ -21,7 +21,6 @@ class GraphTest {
 	private Town clon;
 	private Town caros;
 	
-	
 	@Test 
 	public void setUp() 
 	{
@@ -54,11 +53,8 @@ class GraphTest {
 //		g.mstree();
 //		System.out.println(Arrays.toString(g.getShortestRoute("Waterford", "Cork")));
 		String[] avoid = {"carrick-on-suir"};
-		int[] path = g.getShortestRouteAvoid("Waterford", "Cork", avoid);
-		for(int i : path)
-		{
-			System.out.println(g.getlist()[i]);
-		}
+		g.getShortestRouteAvoid("Waterford", "Cork", avoid);
+		
 	}
 	
 	
