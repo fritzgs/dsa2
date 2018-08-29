@@ -28,9 +28,4 @@ class StackTest {
 		assertEquals(2, stack.search(0));
 		
 	} 
-	
-	
-
-
-	
 }

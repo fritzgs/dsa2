@@ -3,11 +3,6 @@ package dsa2;
 import dsa2.*;
 
 import static org.junit.jupiter.api.Assertions.*;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-
-import org.junit.Before;
 import org.junit.jupiter.api.Test;
 
 class GraphTest {
@@ -52,26 +47,59 @@ class GraphTest {
 	@Test
 	public void addTownTest()
 	{
-		setUp();
-		
-				
+		setUp();			
 		assertEquals("Waterford", g.getlist()[0].getName());
 		assertFalse(g.getlist()[1].getName()  == "Cork");
 		
 	}
 	
-	
 	@Test
-	public void addRoadTest() {
-		
+	public void addRoadTest() {	
 		setUp();
-		
-				
 		assertEquals(40, g.getMatrix()[0][1]);
 		assertEquals(20, g.getMatrix()[2][3]);
-		assertEquals(1000000, g.getMatrix()[2][1]); //direct road from Dungarvan to Cork does not exist.
-	
+		assertEquals(1000000, g.getMatrix()[2][1]); //direct road from Dungarvan to Cork does not exist.	
 	}
 	
-
+	//The following are just for checking whether the void methods are running as expected.
+	@Test
+	public void testGetAllTowns()
+	{
+		System.out.println("---GET ALL TOWNS---");
+		setUp();
+		g.getAllTowns();
+		System.out.println();
+		System.out.println();
+	}
+	
+	@Test
+	public void testGetAllConnected()
+	{
+		System.out.println("---GET ALL CONNECTED TOWNS---");
+		setUp();
+		g.getAllConnected();
+		System.out.println();
+		System.out.println();	
+	}
+	
+	@Test
+	public void testShortestRoute()
+	{
+		System.out.println("---SHORTEST ROUTE---");
+		setUp();
+		g.getShortestRoute("waterford", "Cork");;
+		System.out.println();
+		System.out.println();	
+	}
+	
+	@Test
+	public void testShortestRouteAvoid()
+	{
+		System.out.println("---SHORTEST ROUTE WITH AVOIDING TOWNS---");
+		setUp();
+		String[] avoid = {"carrick-on-suir"};
+		g.getShortestRouteAvoid("waterford", "Cork", avoid);;
+		System.out.println();
+		System.out.println();	
+	}
 }
