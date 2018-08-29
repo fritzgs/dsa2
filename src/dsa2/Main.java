@@ -5,10 +5,11 @@ import java.util.Scanner;
 public class Main {
 	
 	private Scanner sc = new Scanner(System.in);
-	private Graph graph = new Graph();
+	private Graph graph;
 
 	public static void main(String[] args) {
 		Main main = new Main();
+		main.graph = new Graph();
 		main.menu();
 	}
 	
@@ -24,29 +25,26 @@ public class Main {
 		System.out.println();
 		System.out.println("Selection: ");
 
-
-
-
-		int option = sc.nextInt();
+		String option = sc.next();
 		
 		
 		switch(option)
 		{
-			case 1:
+			case "1":
 				optionOne();
 				menu();
 				break;
-			case 2:
+			case "2":
 				graph.getAllTowns();
 				System.out.println();
 				menu();
 				break;
-			case 3:
+			case "3":
 				graph.getAllConnected();
 				System.out.println();
 				menu();
 				break;
-			case 4:
+			case "4":
 				System.out.println("Name of the town to add: ");
 				String townName = sc.next();
 				Town town = new Town(townName);
@@ -54,15 +52,23 @@ public class Main {
 				System.out.println();
 				menu();
 				break;
-			case 5:
+			case "5":
+				System.out.println("Name of the first town to add: ");
+				String town1 = sc.next();
+				System.out.println("Name of the second town to add: ");
+				String town2 = sc.next();
+				System.out.println("Distance between the two towns: ");
+				int dist = sc.nextInt();
+				graph.addRoad(town1, town2, dist);
 				menu();
 				break;
-			case 6:
+			case "7":
 				System.out.println("Exiting...");
 				System.exit(0);
 
 			default:
 				System.out.println("Not a valid input!");
+				System.out.println();
 				menu();
 		}
 	}

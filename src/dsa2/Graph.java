@@ -201,6 +201,7 @@ public class Graph {
 					townList[v].setCheck(true);
 					stack.push(v);
 					System.out.println(townList[currentTown] + " - " + townList[v]);
+					System.out.println("Distance: " + adjacentMtx[currentTown][v] + " km");
 					System.out.println(" ");
 				}
 			}
