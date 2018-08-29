@@ -33,14 +33,17 @@ class GraphTest {
 		g.addTown(mid); //3
 		g.addTown(cobh); //4
 		g.addTown(caros); //5
+		g.addTown(clon); //6
 		
-		g.addRoad(wat, dun, 40);
-		g.addRoad(mid, dun, 50);
-		g.addRoad(mid, cork, 20);
-		g.addRoad(mid, cobh, 30);
-		g.addRoad(wat, caros, 50);
-		g.addRoad(dun, caros, 25);
-		g.addRoad(caros, cork, 20);
+		g.addRoad(wat.getName(), dun.getName(), 40);
+		g.addRoad("Middleton", "Dungarvan", 50);
+		g.addRoad("Middleton", "Cork", 20);
+		g.addRoad("Middleton", "Carrick-on-Suir", 30);
+		g.addRoad("Waterford", "Carrick-on-Suir", 50);
+		g.addRoad("Dungarvan", "Carrick-on-Suir", 30);
+		g.addRoad("Clonmel", "Cork", 30);
+		g.addRoad("clonmel", "carrick-on-suir", 20);
+		
 	}
 	
 	

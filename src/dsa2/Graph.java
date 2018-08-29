@@ -46,33 +46,57 @@ public class Graph {
 	 * @param town2
 	 * @param distance
 	 */
-	public void addRoad(Town town1, Town town2, int distance)
+	public void addRoad(String town1, String town2, int distance)
 	{
-		
-		int index1 = 0;
-		int index2 = 0;
-		
-		//gets the real index of two towns inserted
-		for (int i = 0; i < townList.length; i++)
+		boolean town1ex = false;
+		boolean town2ex = false;
+		for(int j=0; j <townList.length; j++)
 		{
-			if(townList[i] != null)
+			if(townList[j] != null)
 			{
-				if (townList[i].equals(town1))
+				if(townList[j].getName().toLowerCase().equals(town1.toLowerCase()))
 				{
-					index1 = i;
+					town1ex = true;
 				}
-				
-				if (townList[i].equals(town2))
+				if(townList[j].getName().toLowerCase().equals(town2.toLowerCase()))
 				{
-					index2 = i;
+					town2ex = true;
 				}
 			}
-
 		}
 		
-		//adds the distance of the two towns into matrix.
-		adjacentMtx[index1][index2] = distance;
-		adjacentMtx[index2][index1] = distance;
+		if(town1ex == true && town2ex == true)
+		{
+			int index1 = 0;
+			int index2 = 0;
+			
+			//gets the real index of two towns inserted
+			for (int i = 0; i < townList.length; i++)
+			{
+				if(townList[i] != null)
+				{
+					if (townList[i].getName().toLowerCase().equals(town1.toLowerCase()))
+					{
+						index1 = i;
+					}
+					
+					if (townList[i].getName().toLowerCase().equals(town2.toLowerCase()))
+					{
+						index2 = i;
+					}
+				}
+
+			}
+			
+			//adds the distance of the two towns into matrix.
+			adjacentMtx[index1][index2] = distance;
+			adjacentMtx[index2][index1] = distance;
+		}
+		else
+		{
+			System.out.println("One or two of the town names are incorrect - does not exist in list");
+		}
+		
 	}
 	
 	/**
@@ -82,7 +106,7 @@ public class Graph {
 	public void addTown(Town t)
 	{
 		townList[currentNum++] = t;
-		addRoad(t, t, 0);
+		addRoad(t.getName(), t.getName(), 0);
 	}
 	
 	
@@ -116,32 +140,39 @@ public class Graph {
 	 */
 	public void getAllTowns()
 	{
-		//Include first node (root node)
-		townList[0].setCheck(true);
-		System.out.println(townList[0]);
-		stack.push(0);
-		
-		while(!stack.isEmpty()) //loop while stack is isn't empty
+		if(townList[0] == null)
 		{
-			//get an unvisited town adjacent to stack top.
-			int v = getAdjacentUnvisitedTown(stack.peek());
-			if(v==-1)
-			{
-				stack.pop(); //no connections (single node in graph)
-			}
-			else
-			{
-				//set the adjacent as checked and add into stack of nodes in graph.
-				townList[v].setCheck(true);
-				stack.push(v);
-				System.out.println(townList[v]);
-			}
+			System.out.println("No Towns");
 		}
-		
-		//reset the flag to false.
-		for(int i = 0; i < currentNum; i++)
+		else 
 		{
-			townList[i].setCheck(false);
+			//Include first node (root node)
+			townList[0].setCheck(true);
+			System.out.println(townList[0]);
+			stack.push(0);
+			
+			while(!stack.isEmpty()) //loop while stack is isn't empty
+			{
+				//get an unvisited town adjacent to stack top.
+				int v = getAdjacentUnvisitedTown(stack.peek());
+				if(v==-1)
+				{
+					stack.pop(); //no connections (single node in graph)
+				}
+				else
+				{
+					//set the adjacent as checked and add into stack of nodes in graph.
+					townList[v].setCheck(true);
+					stack.push(v);
+					System.out.println(townList[v]);
+				}
+			}
+			
+			//reset the flag to false.
+			for(int i = 0; i < currentNum; i++)
+			{
+				townList[i].setCheck(false);
+			}
 		}
 	}
 	
@@ -151,30 +182,37 @@ public class Graph {
 	 */
 	public void getAllConnected() //based on DFS
 	{
-		townList[0].setCheck(true);
-		stack.push(0);
-		
-		while(!stack.isEmpty()) //loop while stack is isn't empty
+		if(townList[0] != null)
 		{
-			int currentTown = stack.peek();
-			//get an unvisited town adjacent to stack top.
-			int v = getAdjacentUnvisitedTown(stack.peek());
-			if(v==-1)
+			townList[0].setCheck(true);
+			stack.push(0);
+			
+			while(!stack.isEmpty()) //loop while stack is isn't empty
 			{
-				stack.pop();
+				int currentTown = stack.peek();
+				//get an unvisited town adjacent to stack top.
+				int v = getAdjacentUnvisitedTown(stack.peek());
+				if(v==-1)
+				{
+					stack.pop();
+				}
+				else
+				{
+					townList[v].setCheck(true);
+					stack.push(v);
+					System.out.println(townList[currentTown] + " - " + townList[v]);
+					System.out.println(" ");
+				}
 			}
-			else
+			
+			for(int i = 0; i < currentNum; i++)
 			{
-				townList[v].setCheck(true);
-				stack.push(v);
-				System.out.println(townList[currentTown] + " - " + townList[v]);
-				System.out.println(" ");
+				townList[i].setCheck(false);
 			}
 		}
-		
-		for(int i = 0; i < currentNum; i++)
+		else
 		{
-			townList[i].setCheck(false);
+			System.out.println("No Towns");
 		}
 		
 	}
