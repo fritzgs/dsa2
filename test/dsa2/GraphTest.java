@@ -53,7 +53,7 @@ class GraphTest {
 //		g.mstree();
 //		System.out.println(Arrays.toString(g.getShortestRoute("Waterford", "Cork")));
 		String[] avoid = {"carrick-on-suir"};
-		g.getShortestRouteAvoid("Waterford", "Cork", avoid);
+		g.getShortestRoute("Waterford", "Middleton");
 	}
 	
 	

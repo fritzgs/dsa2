@@ -189,7 +189,7 @@ public class Graph {
 	}
 	
 	
-	public int[] getShortestRoute(String start, String dest)
+	public void getShortestRoute(String start, String dest)
 	{
 		//Dijstra's Algorithm
 		//Put all unvisited towns into a set
@@ -255,11 +255,21 @@ public class Graph {
 		{
 			path[j] = stack.pop();
 			
+		}	
+		
+		System.out.println(townList[path[0]].getName() + " to " + townList[path[path.length-1]].getName());
+		
+		if(path.length > 2)
+			System.out.println("\nvia the following towns: \n");
+		
+		for (int t: path)
+		{
+			if(t != path[0] && t != path[path.length-1])
+				System.out.println(townList[t].getName());
+//			if(if path[path.length-1] )
 		}
 		
-//		System.out.println(x);
-
-		return path;
+		System.out.println("\nTotal Distance = "+ townList[path[path.length-1]].getValue() + " kilometers");
 	}
 	
 	public void getShortestRouteAvoid(String start, String dest, String[] avoid)
@@ -346,7 +356,6 @@ public class Graph {
 		{
 			if(t != path[0] && t != path[path.length-1])
 				System.out.println(townList[t].getName());
-//			if(if path[path.length-1] )
 		}
 		
 		System.out.println("\nTotal Distance = "+ townList[path[path.length-1]].getValue() + " kilometers");
