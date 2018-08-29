@@ -20,8 +20,7 @@ class GraphTest {
 	private Town cobh;
 	private Town clon;
 	private Town caros;
-	
-	@Test 
+	 
 	public void setUp() 
 	{
 		g = new Graph();
@@ -47,40 +46,32 @@ class GraphTest {
 		g.addRoad(wat, caros, 50);
 		g.addRoad(dun, caros, 25);
 		g.addRoad(caros, cork, 20);
-		
-		
-//		g.dfsearch();
-//		g.mstree();
-//		System.out.println(Arrays.toString(g.getShortestRoute("Waterford", "Cork")));
-		String[] avoid = {"carrick-on-suir"};
-		g.getShortestRoute("Waterford", "Middleton");
 	}
 	
 	
-//	@Test
-//	public void addTownTest()
-//	{
-//		setUp();
-//		
-//				
-//		assertEquals("Waterford", g.getlist()[0].getName());
-//		assertFalse(g.getlist()[1].getName()  == "Cork");
-//		
-//	}
-//	
+	@Test
+	public void addTownTest()
+	{
+		setUp();
+		
+				
+		assertEquals("Waterford", g.getlist()[0].getName());
+		assertFalse(g.getlist()[1].getName()  == "Cork");
+		
+	}
 	
-//	@Test
-//	public void addRoadTest() {
-//		
-//		setUp();
-//		
-//				
-//		assertEquals(60, g.getMatrix()[0][1]);
-//		assertEquals(20, g.getMatrix()[2][3]);
-//		assertEquals(1000000, g.getMatrix()[2][1]); //direct road from Dungarvan to Cork does not exist.
-//		
-//		
-//	}
+	
+	@Test
+	public void addRoadTest() {
+		
+		setUp();
+		
+				
+		assertEquals(40, g.getMatrix()[0][1]);
+		assertEquals(20, g.getMatrix()[2][3]);
+		assertEquals(1000000, g.getMatrix()[2][1]); //direct road from Dungarvan to Cork does not exist.
+	
+	}
 	
 
 }
