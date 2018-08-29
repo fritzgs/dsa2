@@ -2,6 +2,11 @@ package dsa2;
 
 import java.util.Scanner;
 
+/**
+ * 
+ * @author fritz
+ * Console menu-based user interface
+ */
 public class Main {
 	
 	private Scanner sc = new Scanner(System.in);

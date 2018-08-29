@@ -1,12 +1,15 @@
-/**
- * @author fritzgeraldsantos
- */
 package dsa2.datastructures;
 
 
 import java.util.Arrays;
 import java.util.EmptyStackException;
 
+/**
+ * 
+ * @author fritz
+ *
+ * @param <T> Generic
+ */
 public class Stack<T> implements StackInterface<T>{
 
 	private T[] stack;

@@ -1,5 +1,10 @@
 package dsa2;
 
+/**
+ * 
+ * @author fritz
+ *
+ */
 public class Town {
 	private String name;
 	private boolean wasChecked;

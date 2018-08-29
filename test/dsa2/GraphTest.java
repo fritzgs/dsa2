@@ -5,6 +5,11 @@ import dsa2.*;
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 
+/**
+ * 
+ * @author fritz
+ *
+ */
 class GraphTest {
 
 	private Graph g;

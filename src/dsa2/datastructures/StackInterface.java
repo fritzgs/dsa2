@@ -1,9 +1,8 @@
+package dsa2.datastructures;
+
 /**
  * @author fritzgeraldsantos
  */
-
-package dsa2.datastructures;
-
 public interface StackInterface<T>
 {
 	/**

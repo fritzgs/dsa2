@@ -1,3 +1,4 @@
+
 package dsa2;
 
 import java.util.ArrayList;
@@ -8,7 +9,11 @@ import java.util.Set;
 
 import dsa2.datastructures.*;
 
-
+/**
+ * @author fritz
+ * 
+ * 
+ */
 public class Graph {
 	private final int MAX_TOWNS = 1000;
 	private final int INFINITY = 1000000;
