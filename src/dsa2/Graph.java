@@ -16,10 +16,7 @@ public class Graph {
 	private Town townList[];
 	
 	private int adjacentMtx[][];
-	private int currentNum;
-	
-	private Stack<Integer> stack;
-	
+	private int currentNum;	
 	private int currentTown;
 		
 	/**
@@ -35,8 +32,6 @@ public class Graph {
 		for(int i = 0; i < MAX_TOWNS; i++)
 			for(int j =0; j < MAX_TOWNS; j++)
 				adjacentMtx[i][j] = INFINITY;
-		
-		stack = new Stack<>();		
 	}
 	
 	/**
@@ -140,6 +135,7 @@ public class Graph {
 	 */
 	public void getAllTowns()
 	{
+		Stack<Integer> stack = new Stack<>();
 		if(townList[0] == null)
 		{
 			System.out.println("No Towns");
@@ -182,6 +178,7 @@ public class Graph {
 	 */
 	public void getAllConnected() //based on DFS
 	{
+		Stack<Integer> stack = new Stack<>();
 		if(townList[0] != null)
 		{
 			townList[0].setCheck(true);
@@ -259,6 +256,7 @@ public class Graph {
 	 */
 	public void getShortestRoute(String start, String dest)
 	{
+		Stack<Integer> stack = new Stack<>();
 		//the data set of unvisited - this arraylist is used to find the min.
 		ArrayList<Integer> unvisited = new ArrayList<>();
 		int startIndex = 0;
@@ -347,7 +345,8 @@ public class Graph {
 	 * @param dest
 	 */
 	public void getShortestRouteAvoid(String start, String dest, String[] avoid)
-	{	
+	{			
+		Stack<Integer> stack = new Stack<>();
 		ArrayList<Integer> unvisited = new ArrayList<>();
 		int startIndex = 0;
 		int endIndex = 0;
