@@ -7,6 +7,11 @@ import org.junit.jupiter.api.Test;
 
 import dsa2.datastructures.Stack;
 
+/**
+ * 
+ * @author fritz
+ *
+ */
 class StackTest {
 	
 	private Stack<Integer> stack = new Stack<>();
