@@ -200,7 +200,7 @@ public class Graph {
 				{
 					townList[v].setCheck(true);
 					stack.push(v);
-					System.out.println(townList[currentTown] + " - " + townList[v]);
+					System.out.println(townList[currentTown] + " <-> " + townList[v]);
 					System.out.println("Distance: " + adjacentMtx[currentTown][v] + " km");
 					System.out.println(" ");
 				}
@@ -332,6 +332,16 @@ public class Graph {
 				System.out.println(townList[t].getName());
 		}
 		System.out.println("\nTotal Distance = "+ townList[path[path.length-1]].getValue() + " kilometers");
+		
+		
+		for(Town t : townList)
+		{
+			if(t != null)
+			{
+				t.setCheck(false);
+				t.setValue(INFINITY);
+			}
+		}
 	}
 	
 	/**
@@ -425,6 +435,15 @@ public class Graph {
 		
 		System.out.println("\nTotal Distance = "+ townList[path[path.length-1]].getValue() + " kilometers");
 		
+		
+		for(Town t : townList)
+		{
+			if(t != null)
+			{
+				t.setCheck(false);
+				t.setValue(INFINITY);
+			}
+		}
 	}
 	
 	/**
